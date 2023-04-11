@@ -1,7 +1,7 @@
-import  React from 'react';
+import  React, { useState } from 'react';
 import { AppBar,Box,Button,Toolbar , Typography,} from '@mui/material';
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 
 const StyledToolbar = styled(Toolbar)({
@@ -10,15 +10,14 @@ const StyledToolbar = styled(Toolbar)({
 })
 
 const Navbar = () => {
+  const [isloggedOut,setIsLoggedOut] =  useState(false)
+
+  const navigate = useNavigate()
   
-  // const Search = styled("div")(()=>({
-  //   backgroundColor:"white",
-  //   padding: "0 10",
-  //   borderRadius: 5,
-  //   margin:"8px",
-  //   width:"20%",
-  //   justifyContent:"space-evenly"
-  // }))
+  const logoutHandler = () => {
+      setIsLoggedOut(true)
+      navigate('/')
+  }
 
   return (
     <>
@@ -31,20 +30,12 @@ const Navbar = () => {
     
     <MenuBookIcon sx={{padding:"16px", display:{xs:"block",sm:"none"}}}></MenuBookIcon>
 
-    {/* <Search>
-            <InputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search'}}
-            />
-     </Search> */}
-
     <Box sx={{justifyContent:'space-evenly'}}>
-      <Link to="/login">
-        {/* <Button variant="contained" sx={{backgroundColor: "primary",color:"white", mr: 2 }} >
-          Login
-        </Button> */}
-        {/* <Button component={Link} variant="" to="/login">Login</Button> */}
-      </Link>
+   
+        <Button onClick={logoutHandler} variant="contained" sx={{backgroundColor: "primary",color:"white", mr: 2 }}  >
+          Logout
+        </Button>
+
       </Box>
    
     </StyledToolbar>

@@ -1,33 +1,41 @@
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import NotesIcon from '@mui/icons-material/Notes';
 import InfoIcon from '@mui/icons-material/Info';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
-// const SideBar = ({mode,setMode})
-const SideBar=()=>{
+const SideBar=(props)=>{
+  
+  const [postClicked,setPostClicked] = useState(false)
+
+const postClickedHandler = () => {
+  setPostClicked(true)
+  props.anyname(postClicked)
+}
+const articleClickedHandler = () => {
+  setPostClicked(true)
+  props.anyname(postClicked)
+}
 
 return (
     
     <Box 
     flex={1} padding={2} 
-    sx={{display:{xs:"none",sm:"none",md:"block"}}}>
+    sx={{backgroundColor:"white", display:{xs:"none",sm:"none",md:"block"}}}>
       <Box position="fixed">
      
       <List>
           <ListItem disablePadding>
-            {/* <button> */}
-            <ListItemButton component="a" >
+            <ListItemButton  onClick={articleClickedHandler} component="a" >
               <ListItemIcon>
                 <NotesIcon></NotesIcon>
               </ListItemIcon>
               <ListItemText primary="Articles" /> 
             </ListItemButton>
-            {/* </button> */}
           </ListItem>
      
           <ListItem disablePadding>
-            <ListItemButton  component="a">
+            <ListItemButton onClick={postClickedHandler} component="a">
               <ListItemIcon>
                 <CameraAltIcon></CameraAltIcon>
               </ListItemIcon>
@@ -43,15 +51,7 @@ return (
               <ListItemText primary="About" />
             </ListItemButton>
           </ListItem>
-          
-          {/* <ListItem disablePadding>
-            <ListItemButton component="a" href="#">
-              <ListItemIcon>
-                <DarkModeIcon></DarkModeIcon>
-              </ListItemIcon>
-              <Switch onChange={e=>setMode(mode==="light" ? "dark" : "light")}/>
-            </ListItemButton>
-          </ListItem> */}
+  
         </List>
         </Box>
     </Box>

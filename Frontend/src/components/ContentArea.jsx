@@ -4,6 +4,8 @@ import ArticlesList from './ArticlesList'
 import Post from './Post';
 
 const ContentArea = (props) => {
+  // const [postClicked,setPostClicked]= useState(false)
+  // setPostClicked(props.postClicked)
 
   const [state,setState] = useState(true);
 
@@ -29,10 +31,8 @@ const ContentArea = (props) => {
       <div>
       { state ? <ArticlesList/> : <Post/> }
       </div>
- 
-    {/* <ArticlesList></ArticlesList>
-    <PostsList></PostsList> */}
-    </Stack> 
+
+       </Stack> 
   </>
   )
 }

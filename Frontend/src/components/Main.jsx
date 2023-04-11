@@ -1,44 +1,66 @@
-import { Avatar, Button, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import LoginForm from './LoginForm'
+import { Typography } from '@mui/material'
+import React, { useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 import './Main.css'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LoginForm from './LoginForm';
+import SignupForm from './SignupForm';
 
 const Main = () => {
-  const [isregistered,setisregistered]=useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isregistered, setisregistered] = useState(false);
 
-  const clickHandler = () =>{
-    setisregistered(!isregistered)
-  }
-    
+  const navigate = useNavigate();
+
+  // useEffect(()=> {
+  //   const storedLoggedInInfo = localStorage.getItem('isLoggedIn')
+  //   if(storedLoggedInInfo === '1'){
+  //     setIsLoggedIn(true)
+  //     console.log('user already logged in')
+  //   }
+  // },[])
+
+  const clickHandler = () => {
+    setisregistered(!isregistered);
+  };
+
+  const loginHandler = (email, password) => {
+    localStorage.setItem("isLoggedIn", "1");
+    setIsLoggedIn(true);
+  };
+  const logoutHandler = (email, password) => {
+    setIsLoggedIn(false);
+  };
+
   return (
-    <div className='MainContainer'>
-        <div className='form'>
-            
-        <Avatar sx={{backgroundColor:"#1976d2",height:70,width:70}}><AccountCircleIcon></AccountCircleIcon></Avatar>
-  
-        <TextField variant="outlined" label="username" placeholder='enter username'  fullWidth required></TextField>
-       <TextField label="password" type="password" placeholder='enter password'  fullWidth required></TextField>
-       <Button type="submit" color="primary" variant='contained' fullWidth >Sign in
-       
-       </Button>
+    <>
+      {isLoggedIn && navigate("/home")}
 
-      <Typography>
-      {/* <Link to="/signup"> Sign up</Link> */}
-      {/* {isregistered && <div className='toggle' onClick={clickHandler} >Sign In</div>} */}
-      {!isregistered && <div onClick={clickHandler} >Dont have an account? <span className='toggle'>Register</span></div>}
-      {isregistered && <div onClick={clickHandler} >Already have an account? <span className='toggle'>Sign In</span></div>}
-      </Typography>
+      {!isLoggedIn && (
+        <div className="MainContainer">
+          <div className="form">
+            {!isregistered && <LoginForm />}
+            {isregistered && <SignupForm></SignupForm>}
 
+            <Typography sx={{ cursor: "pointer" }}>
+              <span onClick={clickHandler}>
+                {!isregistered
+                  ? " Dont have an account? Sign Up"
+                  : "Have an account? Login "}
+              </span>
+            </Typography>
+          </div>
+
+          <div className="image">
+            <h1 className="semi">Semi</h1>
+            <h1 className="colon">Colon</h1>
+          </div>
         </div>
-
-        <div className='image'>
-            <h1 className='semi'>Semi</h1>
-            <h1 className='colon'>Colon</h1>
-        </div>
-    </div>
-  )
-}
+      )}
+    </>
+  );
+};
 
 export default Main
+
+
+ 

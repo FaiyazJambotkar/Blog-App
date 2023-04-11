@@ -1,9 +1,10 @@
-import { Avatar, Button, Fab, Grid, Paper, TextField, Typography } from '@mui/material'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Avatar, Button, Grid, Paper, TextField } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
+
+const navigate = useNavigate()
 
   const paperSytle={
     padding:30,
@@ -15,9 +16,12 @@ const LoginForm = () => {
     margin:'10px 0'
   }
 
+  const loginHandler = () => {
+      navigate('/home')
+  }
+
   return (
     <>
-   
       <Paper elevation={10} style={paperSytle}>
         <Grid align="center">
         <Avatar sx={{backgroundColor:"#1976d2",mb:2,height:60,width:60}}><AccountCircleIcon></AccountCircleIcon></Avatar>
@@ -25,19 +29,8 @@ const LoginForm = () => {
        </Grid>
        <TextField variant="outlined" label="username" placeholder='enter username'  fullWidth required sx={{mb:1}}></TextField>
        <TextField label="password" type="password" placeholder='enter password'  fullWidth required></TextField>
-       <Button type="submit" color="primary" style={btnStyle} variant='contained' fullWidth >Sign in
+       <Button onClick={loginHandler} type="submit" color="primary" style={btnStyle} variant='contained' fullWidth >Log in
        </Button>
-
-      <Typography>Dont have an account?
-      <Link to="/signup"> Sign up</Link>
-      </Typography>
-
-      <Fab size="small" color="primary" aria-label="Back to Home" sx={{position:"fixed",bottom:40,left:{xs:20,sm:30,md:40}}}>
-        <Link to="/" >
-        <ArrowBackIcon sx={{alignSelf:"center",justifySelf:"center"}}></ArrowBackIcon>   
-        </Link>
-     </Fab>
-
       </Paper>
 
     </>
